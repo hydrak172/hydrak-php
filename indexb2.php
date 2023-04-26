@@ -168,6 +168,29 @@
     echo '<pre>';
     print_r($arrayClass);
     echo '<pre>';
+
+    $arrayNumber=array(10,20,30,40,50);
+    echo $arrayNumber[0].'<br>'; // 10
+    echo $arrayNumber[2].'<br>'; //30
+
+    $person=array(
+        "name"=>'John',
+        "age"=>30,
+        "city"=>"New York"
+    );
+    echo $person["name"].'<br>';//John
+    echo $person["city"].'<br>'; //New York
+
+    $employees =array(
+        array("name"=> "John","age"=>25,"position"=>"Manager"),
+        array("name"=> "Mary","age"=>28,"position"=>"Developer"),
+        array("name"=> "David","age"=>32,"position"=>"Designer")
+    );
+    echo '<pre>';
+    print_r($employees);
+    echo '<pre>';
+    echo $employees[0]["name"];//John
+    echo $employees[1]["position"];//Developer
   ?>
 </body>
 </html>
