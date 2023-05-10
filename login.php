@@ -1,3 +1,8 @@
+<?php 
+    session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,27 +15,7 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
-<style>
-    body {
-  margin: 0;
-  padding: 0;
-  background-color: #17a2b8;
-  height: 100vh;
-}
-#login .container #login-row #login-column #login-box {
-  margin-top: 120px;
-  max-width: 600px;
-  height: 320px;
-  border: 1px solid #9C9C9C;
-  background-color: #EAEAEA;
-}
-#login .container #login-row #login-column #login-box #login-form {
-  padding: 20px;
-}
-#login .container #login-row #login-column #login-box #login-form #register-link {
-  margin-top: -85px;
-}
-</style>
+
 <body>
     <header>
         <?php 
@@ -38,44 +23,91 @@
         ?>
     </header> 
     <?php 
+    require('database.php');
     if(isset($_POST['Login'])){
-        $Email = $_POST['Email'] ?? null;
-        $Password =$_POST['Password'] ?? null;
-        echo $Email.$Password;
+            $Email = $_POST['Email'] ?? null;
+            $password =$_POST['password'] ?? null;
+            
+            $Email= trim($Email);
+            $Email = htmlspecialchars($Email);
+            $Email = strip_tags($Email);
+
+            $password =sha1($password.'@asadsajhdskjah');
+
+            $sql= "SELECT * FROM hydrak WHERE Email = '".$Email."' AND password = '".$password."'";
+
+            $result = mysqli_query($conn,$sql);
+
+            $rows = mysqli_num_rows($result);
+            if($rows > 0){
+                $_SESSION['Email']=$Email;
+                echo '<br>'.'User co trong he thong nha cu'.'<br>';
+            }else{
+                echo '<br>'."Email or Password is Wrong ".'<br>';
+                
+            }
+    }
+    if(isset($_POST['dangxuat'])){
+        session_unset();//session_destroy(); la remove het
+    } 
+
+    if(isset($_GET['lang'])){
+        // setcookie('lang',$_GET['lang'],time()-(86400*30),"/");//xoa ra khoi roucher
+        setcookie('lang',$_GET['lang'],time()+(86400*30),"/");
+        $_COOKIE['lang'] =$_GET['lang'];
     }
     ?>
-<div id="Login">
-        <h3 class="text-center text-white pt-5">Login</h3>
-        <div class="container">
-            <div id="login-row" class="row justify-content-center align-items-center">
-                <div id="login-column" class="col-md-6">
-                    <div id="login-box" class="col-md-12">
-                        <form id="login-form" class="form" action="" method="post">
-                            <h3 class="text-center text-info">Login</h3>
-                            <div class="form-group">
-                                <label for="Email" class="text-info">Username:</label><br>
-                                <input type="text" name="Email" id="Email" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="Password" class="text-info">Password:</label><br>
-                                <input type="password" name="Password" id="Password" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
-                            </div>
-                            <div id="register-link" class="text-right">
-                                <a href="#" class="text-info">Register here</a>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+
+<?php if(!isset($_SESSION['Email'])){ ?>
+    <form id="Login" class="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+        <h3 class="text-center text-info">Login</h3>
+        <div class="form-group">
+            <label for="Email" class="text-info">Username:</label><br>
+            <input type="text" name="Email" id="Email" class="form-control">
         </div>
-    </div>
-    <footer>
+        <div class="form-group">
+            <label for="Password" class="text-info">Password:</label><br>
+            <input type="password" name="password" id="password" class="form-control">
+        </div>
+        <div class="form-group">
+            <input type="submit" name="Login" class="btn btn-info btn-md" value="submit" >
+
+        </div>
+        <div id="register-link" class="text-right">
+            <a href="#" class="text-info">Register here</a>
+        </div>
+    </form>
+<?php } else { ?>
+    <a href="?lang=vi"> <img src= "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Flag_of_North_Vietnam_%281955%E2%80%931976%29.svg/230px-Flag_of_North_Vietnam_%281955%E2%80%931976%29.svg.png" width="50px" height ="30px" > </a>
+    <a href="?lang=en"> <img src= "https://vuongquocanh.com/wp-content/uploads/2018/04/la-co-vuong-quoc-anh.jpg" width="50px" height ="29px" > </a>
+    <?php 
+    $string ='Xin Chao';
+    if(isset($_COOKIE['lang'])){
+        //if($_COOKIE['lang])==='en'
+        match($_COOKIE['lang']){
+            'en' => $string ='Welcome',
+            'vi'=>$string= 'Xin Chao',
+            default => $string='Welcome',
+        };
+        //if($_COOKIE['lang])=='en'
+        // switch($_COOKIE['lang']){
+        //     case 'en' : 
+        //         $string= 'Welcome';break;
+        //     case 'vi' : 
+        //         $string ='Xin Chao';break;
+        // }
+    }
+    echo $string;
+    ?>
+    <?php echo $_SESSION['Email']; ?>
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST"> 
+        <input type="submit" name ="dangxuat" value="dangxuat"/> 
+    </form>
+<?php }?>
+<footer>
     <?php 
              include('footer.php');
         ?>
-    </footer>
+</footer>
 </body>
 </html>

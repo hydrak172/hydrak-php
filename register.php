@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +31,7 @@ form{
             require('database.php');
         ?>
     </header> 
-<?php 
+<?php  
 echo '<pre>';
 var_dump($_FILES);
 echo '</pre>';
@@ -74,10 +73,10 @@ echo '</pre>';
             //validate done 
             echo $Email.'<br>'.$password.'<br>'.$confirm_password.'<br>';
 
-            echo '<br>'.sha1($password.'@asadsajhdskjah');
+            $password =sha1($password.'@asadsajhdskjah');
             //
             // $sql="INSERT INTO user VALUES ('".rand(4,200)."','".$Email."','".$password."','".$baseFileName."','".$date."')";
-            $sql=sprintf("INSERT INTO user VALUES(null,'%s','%s','%s','%s')",$Email,$password,$baseFileName,$date);
+            $sql=sprintf("INSERT INTO hydrak VALUES(null,'%s','%s','%s','%s')",$Email,$password,$baseFileName,$date);
     
         if($conn->query($sql)===TRUE){
             echo '<br>'."New record created successfully";
