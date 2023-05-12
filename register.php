@@ -1,3 +1,6 @@
+
+<?php define('URL','http://localhost/hydrak-php/'); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -80,6 +83,7 @@ echo '</pre>';
     
         if($conn->query($sql)===TRUE){
             echo '<br>'."New record created successfully";
+            header('Location: '.URL.'list_user.php');
         }else {
             echo "ERROR: " .$sql . '<br>' . $conn->error;
         }

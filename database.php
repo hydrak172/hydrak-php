@@ -1,5 +1,4 @@
 <?php 
-    define('URL','http://localhost/hydrak-php');
     $servername="localhost";
     $usernameDB="root";
     $passwordDB="";
