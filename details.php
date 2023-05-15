@@ -61,15 +61,29 @@ h2{
             }
 
             //check duplicate entry date
-            if(!is_null($baseFileName)){
-                $sql="UPDATE hydrak SET Email='".$Email."', password='".$password."' ,images_url='".$baseFileName."' WHERE id=". $_POST['id'];
-            }else{
-                $sql="UPDATE hydrak SET Email='".$Email."', password='".$password."'". " WHERE id=". $_POST['id'];
-            }
-            // echo $sql;die;
+            // if(!is_null($baseFileName)){
+            //     $sql="UPDATE hydrak SET Email='".$Email."', password='".$password."' ,images_url='".$baseFileName."' WHERE id=". $_GET['id'];
+            // }else{
+            //     $sql="UPDATE hydrak SET Email='".$Email."', password='".$password."'". " WHERE id=". $_GET['id'];
+            // }
+            $arrayData=[
+                'Email'=>$Email,
+                'password'=>$password
+            ];
 
+            if(!is_null($baseFileName)){
+                $arrayData['images_url']=$baseFileName;
+            }
+
+            $sql=prepareUpdateStatement($arrayData,'hydrak',$_POST['id']);
+
+            // echo $sql;die;
+            
             $result=mysqli_query($conn,$sql);
             echo $result ? 'Update thanh cong' : 'Update that bai';
+            if($result === true){
+                header('Location: '.URL.'list_user.php');
+            }
             
         }
     ?>
@@ -78,7 +92,7 @@ h2{
      if(isset($_GET['action']) && $_GET['action'] === 'ShowUser' && isset($_GET['id'])){
         $sqlDetails= 'SELECT * FROM hydrak WHERE id ='.$_GET['id'];
         $resultDetails=mysqli_query($conn,$sqlDetails);
-        $row = mysqli_fetch_assoc($resultDetails);
+        $row = mysqli_fetch_assoc($resultDetails); 
         $Email= $row['Email'];
         $password=$row['password'];
         $images_url=$row['images_url'];

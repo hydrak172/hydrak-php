@@ -32,6 +32,7 @@ form{
             // include_once('header.php');
             //  require_once('header.php');
             require('database.php');
+            require('prepareStatement.php')
         ?>
     </header> 
 <?php  
@@ -78,8 +79,22 @@ echo '</pre>';
 
             $password =sha1($password.'@asadsajhdskjah');
             //
+            $arrayData=[
+                'Email'=>$Email,
+                'password'=>$password,
+                'images_url'=>$baseFileName,
+                'create_at'=>$date
+            ];
+
+            // $columns=implode(',',array_keys($arrayData));
+            // $arrayValues=array_map(function($item){return "'".$item."'";},array_values($arrayData));
+            // $values=implode(',',$arrayValues);
+            // $sql="INSERT INTO $table ($columns) VALUES ($values)";
+
+            $sql=prepareInsertyStatement($arrayData,'hydrak');
+
             // $sql="INSERT INTO user VALUES ('".rand(4,200)."','".$Email."','".$password."','".$baseFileName."','".$date."')";
-            $sql=sprintf("INSERT INTO hydrak VALUES(null,'%s','%s','%s','%s')",$Email,$password,$baseFileName,$date);
+            // $sql=sprintf("INSERT INTO hydrak VALUES(null,'%s','%s','%s','%s')",$Email,$password,$baseFileName,$date);
     
         if($conn->query($sql)===TRUE){
             echo '<br>'."New record created successfully";
