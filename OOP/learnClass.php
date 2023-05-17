@@ -79,5 +79,5 @@
     $cat = new Cat ('Meo Canh','Green',4);
     echo $cat->name;
     echo $cat->color;
-    echo $cat->foot;
+    echo $cat->foot; 
 ?>
