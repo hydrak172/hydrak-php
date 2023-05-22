@@ -5,7 +5,7 @@
     class Retangle extends Shape{
         private $width;
         private $height;
-        public function __constract($width,$height){
+        public function __construct($width,$height){
             $this->width=$width;
             $this->height=$height;
         }
@@ -15,7 +15,7 @@
     }
     class Circle extends Shape{
         private $radius;
-        public function __constract($radius){
+        public function __construct($radius){
             $this->radius=$radius;
         }
         public function getArea(){
@@ -25,7 +25,7 @@
     class Triangle extends Shape{
         private $base;
         private $height;
-        public function __constract($base,$heigth){
+        public function __construct($base,$height){
             $this->base=$base;
             $this->height=$height;
         }
@@ -34,12 +34,9 @@
         }
     }
     $CN=new Retangle(5,10);
-    $CN->getArea();
-    echo $CN.'<br>';
+    echo $CN->getArea().'<br>';
     $Tron=new Circle(10);
-    $CTronN->getArea();
-    echo $Tron.'<br>';
+    echo $Tron->getArea().'<br>';
     $TG=new Triangle(5,10);
-    $TG->getArea();
-    echo $TG.'<br>';
+    echo  $TG->getArea().'<br>';
 ?>
