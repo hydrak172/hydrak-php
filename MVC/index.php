@@ -12,23 +12,28 @@
     <?php 
     require('./Helpers/helper.php');
     require './Controllers/BaseController.php';
-        $controller=$_GET['controller'] ?? 'user'; 
-        $action=$_GET['action'] ?? 'index';
+    require './Core/App.php';
+        // $controller=$_GET['controller'] ?? 'user'; 
+        // $action=$_GET['action'] ?? 'index';
+            // $url =$_GET['url'] ?? 'user';
+            // $controller=explode('/',$url)[0]?? 'user';
+            // $action=explode('/',$url)[1]?? 'index';
+    $app = new App;
     //product_category
-        if(str_contains($controller,'_')){
-            $valueList = array_map(function($v){
-                return ucfirst($v);
-            },explode('_',$controller));
-            $controller=implode('',$valueList);
-        }else{
-            $controller=ucfirst($controller);
-        }
-        $url = './Controllers/'.$controller.'Controller.php'; 
-        require $url;
+        // if(str_contains($controller,'_')){
+        //     $valueList = array_map(function($v){
+        //         return ucfirst($v);
+        //     },explode('_',$controller));
+        //     $controller=implode('',$valueList);
+        // }else{
+        //     $controller=ucfirst($controller);
+        // }
+        // $url = './Controllers/'.$controller.'Controller.php'; 
+        // require $url;
 
-        $controllerName=$controller.'Controller';
-        $objectController= new $controllerName; 
-        $objectController ->$action();
+        // $controllerName=$controller.'Controller';
+        // $objectController= new $controllerName; 
+        // $objectController ->$action();
 
         // dd($objectController);
         // $UserController= new UserController();
@@ -36,13 +41,14 @@
         // $UserController->create();
     ?>
 
-    <a href="index.php?controller=user&action=index">List User</a> <br>
-    <a href="index.php?controller=user&action=create">Create User</a><br>
-    <a href="index.php?controller=product_category&action=index">List Product Category</a><br>
-    <a href="index.php?controller=product_category&action=create">Create Product Category</a><br>
-    <a href="index.php?controller=product&action=index">List Product</a><br>
-    <a href="index.php?controller=product&action=create">Create Product</a><br>
-    <a href="index.php?controller=note&action=index">List Note</a><br>
-    <a href="index.php?controller=note&action=create">Create Note</a><br>
+
+    <a href="index.php?url=user/index">List User</a> <br>
+    <a href="index.php?url=user/create">Create User</a><br>
+    <a href="index.php?url=product_category/index">List Product Category</a><br>
+    <a href="index.php?url=product_category/create">Create Product Category</a><br>
+    <a href="index.php?url=product/index">List Product</a><br>
+    <a href="index.php?url=product/create">Create Product</a><br>
+    <a href="index.php?url=note/index">List Note</a><br>
+    <a href="index.php?url=note/create">Create Note</a><br>
 </body>
 </html>

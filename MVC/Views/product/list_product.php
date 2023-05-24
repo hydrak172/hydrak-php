@@ -7,6 +7,35 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>List_Product</h1>
+    <h1><?= $heading_hot; ?></h1>
+    <table border='1'>
+        <tr>
+            <th>STT</th>
+            <th>Product Name</th>
+        </tr>
+        <?php 
+            foreach($listproductHot as $key => $data) : 
+        ?>
+        <tr>
+            <td><?= $key+1 ?></td>
+            <td><?= $data['name'] ?></td>
+        </tr>
+        <?php endforeach ?>
+    </table>
+    <h1><?= $heading_newarrival; ?> </h1>
+    <table border='1'>
+        <tr>
+            <th>STT</th>
+            <th>Product Name</th>
+        </tr>
+        <?php 
+            foreach($listproductNewArrival as $key => $data) : 
+        ?>
+        <tr>
+            <td><?= $key+1 ?></td>
+            <td><?= $data['name'] ?></td>
+        </tr>
+        <?php endforeach ?>
+    </table>
 </body>
 </html>
