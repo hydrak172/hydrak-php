@@ -10,15 +10,21 @@
     <h1>Trang chu</h1>
 
     <?php 
+    define('URL','http://localhost/hydrak-php/MVC/index.php');
     require('./Helpers/helper.php');
     require './Controllers/BaseController.php';
     require './Core/App.php';
+    require './Core/Database.php';
+    require './Models/BaseModel.php';
         // $controller=$_GET['controller'] ?? 'user'; 
         // $action=$_GET['action'] ?? 'index';
             // $url =$_GET['url'] ?? 'user';
             // $controller=explode('/',$url)[0]?? 'user';
             // $action=explode('/',$url)[1]?? 'index';
-    $app = new App;
+        $db = new Database;
+        $connect =$db->connect();
+    
+        $app = new App;
     //product_category
         // if(str_contains($controller,'_')){
         //     $valueList = array_map(function($v){
