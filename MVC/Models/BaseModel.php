@@ -44,6 +44,27 @@
         public function delete($id,$table='note'){
             $sql = "DELETE FROM $table WHERE id =$id ";
             return mysqli_query($this->connect,$sql);
+        } 
+
+
+        function updateNew($arrayData,$table ='note',$id){
+            $list=[];
+    
+            foreach($arrayData as $key =>$value){
+                $list[]="$key='".$value."'";
+            }
+            $listData = implode(',',$list);
+     
+            $sql = "UPDATE $table set $listData where id=$id"; 
+
+            return mysqli_query($this->connect,$sql);
+        } 
+
+        public function checkUserExists($table,$email):bool{
+            $sql = "SELECT * FROM $table WHERE email = '$email'";
+            $query = mysqli_query($this->connect,$sql);
+            $rows = mysqli_num_rows($query);
+            return $rows > 0 ? true : false ;  
         }
     }
 ?>

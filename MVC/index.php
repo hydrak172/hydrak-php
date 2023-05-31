@@ -8,7 +8,15 @@
 </head>
 <body>
     <h1>Trang chu</h1>
-
+    <a href="index.php?url=user/login">Login</a><br> 
+    <a href="index.php?url=user/index">List User</a> <br>
+    <a href="index.php?url=user/create">Create User</a><br>
+    <a href="index.php?url=product_category/index">List Product Category</a><br>
+    <a href="index.php?url=product_category/create">Create Product Category</a><br>
+    <a href="index.php?url=product/index">List Product</a><br>
+    <a href="index.php?url=product/create">Create Product</a><br>
+    <a href="index.php?url=note/index">List Note</a><br>
+    <a href="index.php?url=note/create">Create Note</a><br>
     <?php 
     define('URL','http://localhost/hydrak-php/MVC/index.php');
     require('./Helpers/helper.php');
@@ -47,14 +55,5 @@
         // $UserController->create();
     ?>
 
-
-    <a href="index.php?url=user/index">List User</a> <br>
-    <a href="index.php?url=user/create">Create User</a><br>
-    <a href="index.php?url=product_category/index">List Product Category</a><br>
-    <a href="index.php?url=product_category/create">Create Product Category</a><br>
-    <a href="index.php?url=product/index">List Product</a><br>
-    <a href="index.php?url=product/create">Create Product</a><br>
-    <a href="index.php?url=note/index">List Note</a><br>
-    <a href="index.php?url=note/create">Create Note</a><br>
 </body>
 </html>

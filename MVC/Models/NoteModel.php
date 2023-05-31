@@ -38,7 +38,13 @@
        // }
        public function destroy($id){
         return  $this->delete($id,self::TABLE);
-    }
+       }
+       public function update($data,$id){
+        return  $this->updateNew($data, self::TABLE, $id);
+       } 
+       public function attemp($email,$password){
+        return $this->checkLogin($email,$password);
+       }
    }
 
 ?>

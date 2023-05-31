@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,24 +9,26 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Create User</h1> 
+    <h1>Update User</h1>
     <form action="" method="POST">
     <label for="">Name</label>
     <br>
-    <input type="text" name="name"/>
+    <input type="text" name="name" value="<?= $user['name'] ?>" />
     <?php echo showError($errors ?? [],'name'); ?> 
     <br>
     <label for="">Email</label>
     <br>
-    <input type="email" name="email"/>
+    <input type="email" name="email" value = "<?= $user['email'] ?>" />
     <?php echo showError($errors ?? [],'email'); ?> 
     <br>
     <label for="">Password</label>
     <br>
-    <input type="password" name="password"/>
+    <input type="password" name="password" value = "<?= $user['password'] ?>"/>
     <?php echo showError($errors ?? [],'password'); ?> 
     
-    <input type="submit" value="Create" name="create_user">
+    <input type="hidden" name="id" value="<?= $user['id'] ?>" />
+    <input type="submit" value="Update" name="update_user">
     </form>
+
 </body>
 </html>

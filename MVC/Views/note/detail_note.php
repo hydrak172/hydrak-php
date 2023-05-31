@@ -30,7 +30,8 @@
     </select>
     <?php echo showError($errors ?? [],'user_id'); ?> 
     <br>
-    <input type="submit" value="Update" name="create_note">
+    <input type="hidden" name="id" value="<?= $note['id'] ?>" />
+    <input type="submit" value="Update" name="update_note">
     </form>
 </body>
 </html>

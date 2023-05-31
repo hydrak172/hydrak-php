@@ -14,13 +14,13 @@
     <textarea name ="content"></textarea>
     <?php echo showError($errors ?? [],'content'); ?> 
     <br>
-    <label for="">User Id</label>
+    <label for="">List User</label>
     <br>
     <select name="user_id" id="">
         <option value="0"><< Please Select >></option>
-        <option value="1">1. Nguyen Van A</option>
-        <option value="2">2. Le Thi B</option>
-        <option value="3">3. Bui Huu C</option>
+        <?php foreach($users as $key => $user): ?> 
+            <option value="<?= $user['id'] ?> "><?= $user['id'] . " - " .$user['name']. " - " .$user['email'] ?></option>
+            <?php endforeach ?> 
     </select>
     <?php echo showError($errors ?? [],'user_id'); ?> 
     <br>
