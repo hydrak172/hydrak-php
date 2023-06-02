@@ -125,9 +125,9 @@
                 $username = $_POST['email'] ?? null;
                 $password =$_POST['password'] ?? null;
                 
-                $username= trim($email);
-                $username = htmlspecialchars($email);
-                $username = strip_tags($email);
+                $username= trim($username);
+                $username = htmlspecialchars($username);
+                $username = strip_tags($username);
     
                 $password =sha1($password.'ABC@123');
     
@@ -136,7 +136,8 @@
                 if($check){
                     header ('Location: '.URL.'?url=user/index');
                 }else{
-                    return $this->view('user.login',['errors'=> 'Username or password is invalid!']);
+                    $errors['password'][]='Username or password not connect!';
+                    return $this->view('user.login', ['errors'=> $errors]);
                 }
             }
             return $this->view('user.login');

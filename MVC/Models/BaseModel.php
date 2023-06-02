@@ -20,6 +20,22 @@
             }
             return $datas;
         }
+
+        public function allHasUserId($userId,$table = 'note'){
+            if(is_null($userId)){
+                return [];
+            }
+            $sql = "SELECT * FROM $table WHERE user_id =  $userId"; // Truy xuat vao table in database
+            $results = mysqli_query($this->connect, $sql); // Lay duoc kq trong database
+            $datas=[];
+
+            //dung php de doc ra tung row trong database
+            while($row=mysqli_fetch_assoc($results)){
+                $datas[] = $row;
+            }
+            return $datas;
+        }
+
         public function find($table, $id){
             $sql = "SELECT * FROM $table WHERE id = $id";
             $results = mysqli_query($this->connect, $sql);
@@ -60,11 +76,29 @@
             return mysqli_query($this->connect,$sql);
         } 
 
+        public function checkLogin($email,$password){
+            $sql = "select * from user where email = '". $email. "' and password = '".$password."'";
+
+            $result= mysqli_query($this->connect,$sql);
+
+            $rows= mysqli_num_rows($result);
+
+            if($rows === 1){
+                $user= mysqli_fetch_assoc($result);
+                $_SESSION['id'] = $user['id'];
+                return true;
+            }
+            return false;
+        }
+
+
         public function checkUserExists($table,$email):bool{
             $sql = "SELECT * FROM $table WHERE email = '$email'";
-            $query = mysqli_query($this->connect,$sql);
-            $rows = mysqli_num_rows($query);
+            $result = mysqli_query($this->connect,$sql);
+            $rows = mysqli_num_rows($result);
             return $rows > 0 ? true : false ;  
         }
+
+       
     }
 ?>

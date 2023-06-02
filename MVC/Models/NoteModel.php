@@ -8,9 +8,9 @@
        //     $db = new Database;
        //     $this->connect = $db->connect();
        // }
-       public function getListNote(){
+       public function getListNote($userId){
  
-           $datas = $this->all(self::TABLE);
+           $datas = $this->all(self::TABLE,$userId);
            // $sql = 'SELECT * FROM table_note'; // Truy xuat vao table in database
            // $results = mysqli_query($this->connect, $sql); // Lay duoc kq trong database
            
@@ -21,7 +21,9 @@
        //     }
            return $datas;
        }
-
+       public function getListByUserId($userId){
+        return $this->allHasUserId($userId,self::TABLE);
+       }
        public function getDetail($id){
            $data = $this->find(self::TABLE, $id);
            return $data;

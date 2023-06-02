@@ -12,7 +12,9 @@
             $this->userModel = new userModel;
         }
         public function index(){
-            $notes = $this->noteModel->getListNote();
+            $userId= $_SESSION['id']?? null;
+
+            $notes = $this->noteModel->getListByUserId($userId);
 
             return $this->view('note.list_note', ['notes' => $notes]);
         }
@@ -78,7 +80,18 @@
             }
 
             $note = $this->noteModel->getDetail($id);
-            return $this->view('note.detail_note', ['note'=> $note] ); 
+            
+            if(is_null($note)){
+                return $this->view('pages.404');
+            }
+            
+            $userId=$_SESSION['id'] ?? null;
+            if($userId == $note['user_id']){
+                return $this->view('note.detail_note',['note' => $note]);
+            }else{
+                return $this->view('pages.403');
+            }
+            // return $this->view('note.detail_note', ['note'=> $note] ); 
         }
 
 

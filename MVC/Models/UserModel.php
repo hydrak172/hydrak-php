@@ -41,8 +41,8 @@
         public function update($data,$id){
         return  $this->updateNew($data, self::TABLE, $id);
         }
-        public function attempLogin($email,$password){
-            return $this->checkLogin($email,$password);
+        public function attempLogin($email, $password){
+            return $this->checkLogin($email, $password);
            }
     }
 ?>

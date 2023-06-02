@@ -6,7 +6,7 @@
     function showError($errors,$input){
         $string = '';
         if(isset($errors[$input])){
-            foreach($errors[$input]as $error){
+            foreach($errors[$input] as $error){
                 $string .= '<br>'."<small style='color:red'>".$error.'</small>';
             }
         }
